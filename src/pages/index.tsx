@@ -15,8 +15,9 @@ export type PageProps = {
 export default function PageComponent(
   data: InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
+  //console.log('test2>>', data);
   const { films } = data;
-
+  //console.log('test3>>', films);
   if (!films) {
     return (<p>error</p>);
   }
@@ -28,25 +29,33 @@ export default function PageComponent(
       </Head>
       <h1>Star Wars films</h1>
       {films.map((film, i) => (
-        <Film key={i} />
+        <Film film_data={film} key={i} />
       ))}
     </Layout>
   );
 }
-
+//# TODO sækja gögn um myndir
 const query = `
-  {
-    # TODO sækja gögn um myndir
-  }
-  ${characterFragment}
+    {
+      allFilms {
+        films {
+          title
+          episodeID
+          openingCrawl
+        }
+      }
+    }    
 `;
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
-  const films = await fetchSwapi<any>(query); // TODO EKKI any
+  const data = await fetchSwapi<any>(query); // TODO EKKI any
 
+  //console.log('test1>>', data.allFilms);
+  //const films = data.allFilms;
+  //console.log('testultima>>', films)
   return {
     props: {
-      films,
+      films: data.allFilms.films,
     },
   };
 };
