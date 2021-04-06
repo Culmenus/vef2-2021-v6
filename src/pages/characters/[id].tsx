@@ -8,6 +8,7 @@ import { ICharacter } from '../../types';
 
 import { Layout } from '../../components/layout/Layout';
 import { Person } from '../../components/person/Person';
+import { Console } from 'console';
 
 export type PageProps = {
   person: ICharacter | null;
@@ -23,7 +24,7 @@ export default function PageComponent(
   }
 
   const { name } = person;
-
+  
   return (
     <Layout>
       <Head>
@@ -36,11 +37,13 @@ export default function PageComponent(
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async ({ params }) => {
   const id = params?.id as string | undefined;
+  
 
   const query = `
-    query($id: ID!) {
-      person(id: $id){
+    query ($id: ID!) {
+      person (id: $id) {
         ...character
+      }
     }
     ${characterFragment}
   `;
@@ -49,6 +52,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({ params
 
   if (id) {
     // TODO EKKI any
+    console.log("param id>> ", id);
     const result = await fetchSwapi<any>(query, { id });
 
     person = result.person ?? null;

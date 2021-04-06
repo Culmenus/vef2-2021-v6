@@ -6,6 +6,7 @@ export const characterFragment = `
     id
     name
     birthYear
+    eyeColor
     hairColor
     height
     mass
