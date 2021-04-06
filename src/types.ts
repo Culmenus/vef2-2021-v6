@@ -1,7 +1,7 @@
 // Hér eru þær týpur sem við skilgreinum á móti GraphQL endapunkti
 
 export interface ICharacter {
-  id: string;
+  id?: string;
   name?: string;
   birthYear?: string;
   eyeColor?: string;
@@ -21,5 +21,21 @@ export interface IFilm {
 }
 
 export interface IPaging {
-  
+  endCursor: string;
+  hasNextPage: boolean;
+}
+
+export interface IEdge {
+  node: ICharacter;
+  cursor: string;
+}
+
+export interface IPeopleResponse {
+  allPeople: IAllPeople;
+}
+
+export interface IAllPeople {
+  totalCount: number;
+  edges: Array<IEdge>;
+  pageInfo: IPaging;
 }

@@ -17,7 +17,7 @@ export async function fetchSwapi<T>(
 ): Promise<T> {
   const serializedVariables = encodeURIComponent(JSON.stringify(variables));
   let result = null;
-
+  
   try {
     result = await fetch(
       `${baseUrl}?query=${query}&variables=${serializedVariables}`,
@@ -46,11 +46,17 @@ export async function fetchCharacters(after = ''): Promise<any> {
   // Nákvæmlega hvað við sækjum per character er skilgreint í fragmenti
   const query = `
     query($after: String = "") {
-      allPeople (first: 10){
-        people {
-          id
-          name
-    
+      allPeople (first: 10 after: $after) {
+        totalCount
+        edges {
+          node {
+            ...character
+          }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
         }
       }
     }
