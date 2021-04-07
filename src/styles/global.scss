@@ -19,9 +19,18 @@ body {
 a {
   color: #0070f3;
   text-decoration: underline;
+  margin-right: 1rem;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+section {
+  margin: 1rem 0;
+}
+
+hr {
+  margin-top: 2rem;
 }

@@ -18,6 +18,11 @@ export interface IFilm {
   title: string;
   episodeID: number;
   openingCrawl: string;
+  characterConnection: ICharCon;
+}
+
+export interface ICharCon {
+  characters: Array<ICharacter>;
 }
 
 export interface IPaging {

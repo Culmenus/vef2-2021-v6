@@ -15,9 +15,9 @@ export type PageProps = {
 export default function PageComponent(
   data: InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
-  //console.log('test2>>', data);
+ 
   const { films } = data;
-  //console.log('test3>>', films);
+  
   if (!films) {
     return (<p>error</p>);
   }
@@ -42,6 +42,12 @@ const query = `
           title
           episodeID
           openingCrawl
+          characterConnection {
+            characters {
+              id
+              name
+            }
+          }
         }
       }
     }    
@@ -50,9 +56,6 @@ const query = `
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   const data = await fetchSwapi<any>(query); // TODO EKKI any
 
-  //console.log('test1>>', data.allFilms);
-  //const films = data.allFilms;
-  //console.log('testultima>>', films)
   return {
     props: {
       films: data.allFilms.films,

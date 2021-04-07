@@ -13,9 +13,22 @@ export function Film({ film_data }: Props): JSX.Element {
       <h2 className={s.film__title}>
         {film_data?.title}
       </h2>
-      <p>film id: {film_data?.episodeID}</p>
-      <div><p>{film_data?.openingCrawl}</p></div>
-
+      <div className={s.film__box}>
+        <div className={s.film__crawl}>
+          <pre>{film_data?.openingCrawl}</pre>
+        </div>
+        <div>
+          <h3>Characters</h3>
+          <div className={s.film__chars}>
+          {film_data?.characterConnection.characters.map((char, i) => (
+            <div key={i}>
+              <Link href={`/characters/${char.id}`}>{char.name}</Link>
+            </div>
+          ))}
+          </div>
+        </div>
+      </div>
+      <hr></hr>
     </section>
   );
 }

@@ -1,4 +1,23 @@
 
 .film {
-  
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__box {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__chars {
+    display: flex;
+    max-height: 2rem;
+    flex-wrap: wrap;
+  }
+
+  &__crawl {
+    margin-right: 1rem;
+
+  }
 }

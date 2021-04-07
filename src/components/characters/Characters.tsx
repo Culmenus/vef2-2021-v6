@@ -78,10 +78,8 @@ export function Characters({ data }: Props): JSX.Element {
       setCharacters(update);
 
       // update lastCursor and hasNextPage
-
       let lastCursorUpdate: string = out.allPeople.pageInfo.endCursor;
       setLastCursor(lastCursorUpdate);
-    
       let hasNextPageUpdate: boolean = out.allPeople.pageInfo.hasNextPage;
       setHasNextPage(hasNextPageUpdate);
 
