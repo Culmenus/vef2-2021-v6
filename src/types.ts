@@ -44,3 +44,15 @@ export interface IAllPeople {
   edges: Array<IEdge>;
   pageInfo: IPaging;
 }
+
+export interface IPersonResponse {
+  person: ICharacter;
+}
+
+export interface IAllFilmsResponse {
+  allFilms: IFilmWrapper;
+}
+
+export interface IFilmWrapper {
+  films: Array<IFilm>;
+}

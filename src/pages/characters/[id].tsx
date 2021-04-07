@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { ErrorPage } from '../../containers/Error';
 import { characterFragment } from '../../graphql/characterFragment';
 import { fetchSwapi } from '../../lib/swapi';
-import { ICharacter } from '../../types';
+import { ICharacter, IPersonResponse } from '../../types';
 
 import { Layout } from '../../components/layout/Layout';
 import { Person } from '../../components/person/Person';
@@ -52,8 +52,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async ({ params
 
   if (id) {
     // TODO EKKI any
-    console.log("param id>> ", id);
-    const result = await fetchSwapi<any>(query, { id });
+    const result = await fetchSwapi<IPersonResponse>(query, { id });
 
     person = result.person ?? null;
   }

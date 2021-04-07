@@ -30,7 +30,7 @@ export default function PageComponent(
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // TODO sækja karaktera
-  const peopleResponse = await fetch('http://localhost:3000/api/characters', {
+  const peopleResponse: IPeopleResponse = await fetch('http://localhost:3000/api/characters', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
