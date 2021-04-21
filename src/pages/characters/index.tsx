@@ -33,6 +33,9 @@ export default function PageComponent(
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // TODO sækja karaktera
+  console.log(process.env.NODE_ENV);
+  console.log(dev);
+  console.log(server);
   const peopleResponse: IPeopleResponse = await fetch(`${server}/api/characters`, { 
     method: 'POST',
     headers: {
@@ -43,7 +46,7 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     .then((res) => res.json())
     .then((json) => json.data);
 
-  console.log('aaaaaaaaaaaat', peopleResponse);
+  //console.log('aaaaaaaaaaaat', peopleResponse);
 
   return {
     props: {
