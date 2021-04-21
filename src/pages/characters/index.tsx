@@ -8,7 +8,7 @@ import { IEdge, IPaging, IPeopleResponse } from '../../types';
 
 export type PageProps = {
   peopleResponse: IPeopleResponse; // TODO EKKI any
-  characters__list: Array<IEdge>;
+  //characters__list: Array<IEdge>;
 };
 
 export default function PageComponent(
