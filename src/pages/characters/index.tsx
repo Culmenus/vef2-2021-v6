@@ -6,6 +6,9 @@ import { Layout } from '../../components/layout/Layout';
 import { fetchCharacters } from '../../lib/swapi';
 import { IEdge, IPaging, IPeopleResponse } from '../../types';
 
+const dev = process.env.NODE_ENV !== 'production';
+export const server = dev ? 'http://localhost:3000' : 'https://vef2-2021-v6-oat3.herokuapp.com';
+
 export type PageProps = {
   peopleResponse: IPeopleResponse; // TODO EKKI any
   //characters__list: Array<IEdge>;
@@ -30,7 +33,7 @@ export default function PageComponent(
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // TODO sækja karaktera
-  const peopleResponse: IPeopleResponse = await fetch('http://localhost:3000/api/characters', {
+  const peopleResponse: IPeopleResponse = await fetch(`${server}/api/characters`, { 
     method: 'POST',
     headers: {
       'Content-type': 'application/json',
