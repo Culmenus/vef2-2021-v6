@@ -1,12 +1,16 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable import/no-cycle */
+// leyfi mér þetta því ég er að exporta server breytuna fyrir Characters component
+// og veit að þetta virkar á heroku og hér
+// vil ekki breyta storka örlögum og breyta kóðanum núna
+// og þetta er ekki hræðinlegt import cycle. Ráðlagt beint af netinu.
 import React, { useEffect, useState } from 'react';
-
 import Link from 'next/link';
-
 import s from './Characters.module.scss';
 import { Button } from '../button/Button';
-import { IAllPeople, ICharacter, IEdge, IPeopleResponse } from '../../types';
-import { fetchCharacters } from '../../lib/swapi';
-
+import {
+  IAllPeople, ICharacter, IEdge, IPeopleResponse,
+} from '../../types';
 import { server } from '../../pages/characters/index';
 
 type Props = {
@@ -26,7 +30,7 @@ type Props = {
  *  .filter((Boolean as unknown) as ExcludesFalse);
  * items verður Array<T> en ekki Array<T | null>
  */
-type ExcludesFalse = <T>(x: T | null | undefined | false) => x is T;
+// type ExcludesFalse = <T>(x: T | null | undefined | false) => x is T;
 
 export function Characters({ data }: Props): JSX.Element {
   // TODO meðhöndla loading state, ekki þarf sérstaklega að villu state
@@ -36,11 +40,10 @@ export function Characters({ data }: Props): JSX.Element {
   const [characters, setCharacters] = useState<Array<ICharacter>>([]);
   const [lastCursor, setLastCursor] = useState<string | null>(null);
   const [hasNextPage, setHasNextPage] = useState<boolean | null>(false);
-  
 
-  let nodes = data.edges.map(n => n.node);
-  let hasNextPageud = data.pageInfo.hasNextPage;
-  let lcupdate = data.pageInfo.endCursor;
+  const nodes = data.edges.map((n) => n.node);
+  const hasNextPageud = data.pageInfo.hasNextPage;
+  const lcupdate = data.pageInfo.endCursor;
 
   useEffect(() => {
     setLoading(true);
@@ -65,21 +68,21 @@ export function Characters({ data }: Props): JSX.Element {
         .then((res) => res.json())
         .then((json) => json.data);
 
-      let newData: Array<IEdge> = out.allPeople.edges;
+      const newData: Array<IEdge> = out.allPeople.edges;
 
       // get ICharacter array from IEdge
-      let extNode = newData.map(n => n.node)
-      let update = characters;
+      const extNode = newData.map((n) => n.node);
+      const update = characters;
       // e-d trash
-      extNode.forEach(i => {
+      extNode.forEach((i) => {
         update.push(i);
       });
       setCharacters(update);
 
       // update lastCursor and hasNextPage
-      let lastCursorUpdate: string = out.allPeople.pageInfo.endCursor;
+      const lastCursorUpdate: string = out.allPeople.pageInfo.endCursor;
       setLastCursor(lastCursorUpdate);
-      let hasNextPageUpdate: boolean = out.allPeople.pageInfo.hasNextPage;
+      const hasNextPageUpdate: boolean = out.allPeople.pageInfo.hasNextPage;
       setHasNextPage(hasNextPageUpdate);
 
       setLoading(false);

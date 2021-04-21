@@ -18,7 +18,7 @@ export async function fetchSwapi<T>(
 ): Promise<T> {
   const serializedVariables = encodeURIComponent(JSON.stringify(variables));
   let result = null;
-  
+
   try {
     result = await fetch(
       `${baseUrl}?query=${query}&variables=${serializedVariables}`,

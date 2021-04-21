@@ -4,7 +4,6 @@ import Head from 'next/head';
 import { Film } from '../components/film/Film';
 
 import { Layout } from '../components/layout/Layout';
-import { characterFragment } from '../graphql/characterFragment';
 import { fetchSwapi } from '../lib/swapi';
 import { IAllFilmsResponse, IFilm } from '../types';
 
@@ -15,9 +14,8 @@ export type PageProps = {
 export default function PageComponent(
   data: InferGetServerSidePropsType<typeof getServerSideProps>,
 ): JSX.Element {
- 
   const { films } = data;
-  
+
   if (!films) {
     return (<p>error</p>);
   }
@@ -34,7 +32,7 @@ export default function PageComponent(
     </Layout>
   );
 }
-//# TODO sækja gögn um myndir
+// # TODO sækja gögn um myndir
 const query = `
     {
       allFilms {

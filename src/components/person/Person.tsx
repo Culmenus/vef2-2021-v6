@@ -12,30 +12,30 @@ export function Person({ person }: Props): JSX.Element {
       <h1>{person.name}</h1>
       <div>
         <strong>Birth year:</strong>
-        <br></br>
+        <br />
         <p>{person.birthYear}</p>
       </div>
       <div>
         <strong>Eye color:</strong>
-        <br></br>
+        <br />
         <p>{person.eyeColor}</p>
       </div>
       <div>
         <strong>Hair color:</strong>
-        <br></br>
+        <br />
         <p>{person.hairColor}</p>
       </div>
       <div>
         <strong>Height:</strong>
-        <br></br>
+        <br />
         <p>{person.height}</p>
       </div>
       <div>
         <strong>Mass:</strong>
-        <br></br>
+        <br />
         <p>{person.mass}</p>
       </div>
-      
+
       <Link href="/characters">Back to characters</Link>
     </div>
   );
