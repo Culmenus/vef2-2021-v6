@@ -4,7 +4,7 @@ import { Characters } from '../../components/characters/Characters';
 
 import { Layout } from '../../components/layout/Layout';
 import { fetchCharacters } from '../../lib/swapi';
-import { IEdge, IPaging, IPeopleResponse } from '../../types';
+import { IPeopleResponse } from '../../types';
 
 const dev = process.env.NODE_ENV !== 'production';
 export const server = dev ? 'http://localhost:3000' : 'https://vef2-2021-v6-oat3.herokuapp.com';
@@ -19,7 +19,7 @@ export default function PageComponent(
 ): JSX.Element {
   const { peopleResponse } = data;
   const characters__list = peopleResponse.allPeople;
-  //console.log("2>>", peopleResponse);
+
   return (
     <Layout>
       <Head>
@@ -33,9 +33,6 @@ export default function PageComponent(
 
 export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
   // TODO sækja karaktera
-  console.log(process.env.NODE_ENV);
-  console.log(dev);
-  console.log(server);
   const peopleResponse: IPeopleResponse = await fetch(`${server}/api/characters`, { 
     method: 'POST',
     headers: {
@@ -46,7 +43,6 @@ export const getServerSideProps: GetServerSideProps<PageProps> = async () => {
     .then((res) => res.json())
     .then((json) => json.data);
 
-  //console.log('aaaaaaaaaaaat', peopleResponse);
 
   return {
     props: {

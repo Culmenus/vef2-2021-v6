@@ -34,7 +34,6 @@ export function Characters({ data }: Props): JSX.Element {
 
   // TODO setja grunngögn sem koma frá server
   const [characters, setCharacters] = useState<Array<ICharacter>>([]);
-  //console.log("test1>>",data);
   const [lastCursor, setLastCursor] = useState<string | null>(null);
   const [hasNextPage, setHasNextPage] = useState<boolean | null>(false);
   
@@ -42,8 +41,7 @@ export function Characters({ data }: Props): JSX.Element {
   let nodes = data.edges.map(n => n.node);
   let hasNextPageud = data.pageInfo.hasNextPage;
   let lcupdate = data.pageInfo.endCursor;
-  //console.log("test1.5>>", nodes);
-  //console.log(lastCursor);
+
   useEffect(() => {
     setLoading(true);
     setLastCursor(lcupdate);
@@ -51,7 +49,6 @@ export function Characters({ data }: Props): JSX.Element {
     setCharacters(nodes);
     setLoading(false);
   }, []);
-  //console.log("test2>>",characters)
 
   const fetchMore = async (): Promise<void> => {
     // TODO sækja gögn frá /pages/api/characters.ts (gegnum /api/characters), ef það eru fleiri
