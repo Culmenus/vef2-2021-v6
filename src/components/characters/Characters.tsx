@@ -7,6 +7,8 @@ import { Button } from '../button/Button';
 import { IAllPeople, ICharacter, IEdge, IPeopleResponse } from '../../types';
 import { fetchCharacters } from '../../lib/swapi';
 
+import { server } from '../../pages/characters/index';
+
 type Props = {
   data: IAllPeople;
 };
@@ -56,7 +58,7 @@ export function Characters({ data }: Props): JSX.Element {
     // (sjá pageInfo.hasNextPage) með cursor úr pageInfo.endCursor
     if (hasNextPage) {
       setLoading(true);
-      const out: IPeopleResponse = await fetch(`http://localhost:3000/api/characters?after=${lastCursor}`, {
+      const out: IPeopleResponse = await fetch(`${server}/api/characters?after=${lastCursor}`, {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
